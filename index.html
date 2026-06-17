@@ -84,10 +84,12 @@ body {
 
 .rose {
   position: fixed;
-  top: -50px;
+  top: -80px;
   font-size: 32px;
-  animation: fall linear forwards;
-  z-index: 50;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards:
+  z-index: 500;
   pointer-events: none;
 }
 
@@ -177,23 +179,34 @@ const heartPage = document.getElementById("heartPage");
 startBtn.addEventListener("click", () => {
   startScreen.style.display = "none";
 
-  setInterval(() => {
-    const rose = document.createElement("div");
-    rose.className = "rose";
-    rose.innerText = "🌹";
-    rose.style.left = Math.random() * 100 + "vw";
-    rose.style.animationDuration = (3 + Math.random() * 3) + "s";
-    document.body.appendChild(rose);
+  // Make the screen black during the transition
+  heartPage.style.opacity = "0";
 
+  // Create a huge wave of roses all at once
+  for (let i = 0; i < 450; i++) {
     setTimeout(() => {
-      rose.remove();
-    }, 6000);
-  }, 250);
+      const rose = document.createElement("div");
+      rose.className = "rose";
+      rose.innerText = "🌹";
 
+      rose.style.left = Math.random() * 100 + "vw";
+      rose.style.fontSize = (24 + Math.random() * 28) + "px";
+      rose.style.animationDuration = (2.5 + Math.random() * 1.8) + "s";
+
+      document.body.appendChild(rose);
+
+      setTimeout(() => {
+        rose.remove();
+      }, 5000);
+    }, Math.random() * 1400);
+  }
+
+  // Reveal the heart after the rose waterfall
   setTimeout(() => {
     heartPage.style.opacity = "1";
-  }, 800);
+  }, 2600);
 });
+
 </script>
 
 </body>
