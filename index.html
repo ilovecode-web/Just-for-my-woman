@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>I Love You Heart</title>
+<style>
+  body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+  }
+
+  .heart {
+    position: relative;
+    width: 600px;
+    height: 500px;
+    transform-style: preserve-3d;
+    animation: rotate 10s linear infinite;
+  }
+
+  .text {
+    position: absolute;
+    color: #ff9acb;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
+    white-space: nowrap;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { opacity: .25; transform: scale(.8); }
+    to { opacity: 1; transform: scale(1.2); }
+  }
+
+  @keyframes rotate {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="heart" id="heart"></div>
+
+<script>
+const heart = document.getElementById("heart");
+
+for (let i = 0; i < 220; i++) {
+  let t = Math.random() * Math.PI * 2;
+
+  let x = 16 * Math.pow(Math.sin(t), 3);
+  let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+  let z = (Math.random() - 0.5) * 300;
+
+  let text = document.createElement("div");
+  text.className = "text";
+  text.innerText = "I love you";
+
+  text.style.left = (300 + x * 18) + "px";
+  text.style.top = (250 + y * 18) + "px";
+  text.style.transform = `translateZ(${z}px)`;
+  text.style.animationDelay = Math.random() * 2 + "s";
+
+  heart.appendChild(text);
+}
+</script>
+
+</body>
+</html>
