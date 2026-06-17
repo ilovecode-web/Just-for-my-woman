@@ -92,7 +92,7 @@ body {
 <script>
 const heart = document.getElementById("heart");
 
-for (let i = 0; i < 230; i++) {
+for (let i = 0; i < 180; i++) {
   let t = Math.random() * Math.PI * 2;
 
   let x = 16 * Math.pow(Math.sin(t), 3);
@@ -102,9 +102,9 @@ for (let i = 0; i < 230; i++) {
   text.className = "text";
   text.innerText = "I love you Danica";
 
-  text.style.left = (350 + x * 19) + "px";
-  text.style.top = (300 + y * 19) + "px";
-  text.style.fontSize = (12 + Math.random() * 12) + "px";
+  text.style.left = (350 + x * 25) + "px";
+  text.style.top = (340 + y * 25) + "px";
+  text.style.fontSize = (8 + Math.random() * 6) + "px";
   text.style.animationDelay = Math.random() * 2 + "s";
 
   heart.appendChild(text);
