@@ -16,6 +16,32 @@ body {
   font-family: Arial, sans-serif;
 }
 
+#startScreen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#startBtn {
+  font-size: 35px;
+  padding: 20px 45px;
+  border: none;
+  border-radius: 50px;
+  background: #ff5ebc;
+  color: white;
+  box-shadow: 0 0 20px #ff5ebc, 0 0 45px #ff5ebc;
+  cursor: pointer;
+}
+
+#heartPage {
+  opacity: 0;
+  transition: opacity 3s ease;
+}
+
 .heart {
   position: relative;
   width: 700px;
@@ -56,6 +82,22 @@ body {
   animation: twinkle 1.5s infinite alternate;
 }
 
+.rose {
+  position: fixed;
+  top: -50px;
+  font-size: 32px;
+  animation: fall linear forwards;
+  z-index: 50;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
 @keyframes glow {
   from {
     opacity: 0.35;
@@ -82,10 +124,16 @@ body {
 
 <body>
 
-<div class="heart" id="heart">
-  <div class="center-message">
-    May I be your<br>
-    <span>pretend wife?</span>
+<div id="startScreen">
+  <button id="startBtn">❤️ Click Me ❤️</button>
+</div>
+
+<div id="heartPage">
+  <div class="heart" id="heart">
+    <div class="center-message">
+      May I be your<br>
+      <span>pretend wife?</span>
+    </div>
   </div>
 </div>
 
@@ -121,6 +169,31 @@ for (let i = 0; i < 80; i++) {
 
   heart.appendChild(sparkle);
 }
+
+const startBtn = document.getElementById("startBtn");
+const startScreen = document.getElementById("startScreen");
+const heartPage = document.getElementById("heartPage");
+
+startBtn.addEventListener("click", () => {
+  startScreen.style.display = "none";
+
+  setInterval(() => {
+    const rose = document.createElement("div");
+    rose.className = "rose";
+    rose.innerText = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(rose);
+
+    setTimeout(() => {
+      rose.remove();
+    }, 6000);
+  }, 250);
+
+  setTimeout(() => {
+    heartPage.style.opacity = "1";
+  }, 800);
+});
 </script>
 
 </body>
